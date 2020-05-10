@@ -41,6 +41,7 @@ const MessagesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 5px;
 `;
 
@@ -117,7 +118,16 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on("message", (newMessage: IMessage) => {
-      setMessages((messages) => [...messages, newMessage]);
+      setMessages((messages) => [
+        ...messages,
+        {
+          ...newMessage,
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+      ]);
     });
   }, []);
 
