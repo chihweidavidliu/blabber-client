@@ -1,28 +1,12 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useHistory } from "react-router-dom";
-import { Paper, Input, Button } from "@material-ui/core";
+import { Input, Button } from "@material-ui/core";
 import styled from "styled-components";
 
-const PageWrapper = styled.div`
-  background-color: teal;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { PageWrapper } from "../../components/PageWrapper";
+import { Card } from "../../components/Card";
 
-const Card = styled(Paper)`
-  width: 600px;
-  height: 400px;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const InputsWrapper = styled.form`
+const LoginForm = styled.form`
   margin-top: 30px;
   display: grid;
   grid-gap: 20px;
@@ -36,14 +20,14 @@ const Home = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    history.push(`/chat?room=${room}&user=${name}`);
+    history.push(`/chat?room=${room}&name=${name}`);
   };
 
   return (
     <PageWrapper>
       <Card elevation={2}>
         <h1>Blabber</h1>
-        <InputsWrapper onSubmit={handleSubmit}>
+        <LoginForm onSubmit={handleSubmit}>
           <Input
             type="text"
             placeholder="Name"
@@ -64,7 +48,7 @@ const Home = () => {
           />
 
           <Button type="submit">Join</Button>
-        </InputsWrapper>
+        </LoginForm>
       </Card>
     </PageWrapper>
   );
