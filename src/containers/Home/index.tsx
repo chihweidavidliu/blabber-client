@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useHistory } from "react-router-dom";
 import { Paper, Input, Button } from "@material-ui/core";
 import styled from "styled-components";
 
@@ -31,11 +32,11 @@ const InputsWrapper = styled.form`
 const Home = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const history = useHistory();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("name", name);
-    console.log("room", room);
+    history.push(`/chat?room=${room}&user=${name}`);
   };
 
   return (
